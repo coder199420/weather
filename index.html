@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- <script src="script.js"></script> -->
+    <script src="tempWeather.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <!--Accept: text/html
+    Accept: image/*
+    User-Agent: (myweatherapp.com, contact@myweatherapp.com)-->
+
+
+</head>
+<body id="body" onload="getWeather()">
+
+    <main>
+        <section>
+            <h1 id="header"></h1>
+            
+            <div id="days">
+            </div>
+        </section>
+    </main>
+
+
+
+
+    <div class="forecast" id="forecast">
+        <h3 ><span id="city"></span>, <span id="state"></span></h3>
+        <p id="tempInfo"><span id="temp"></span>&deg; <span id="tempUnit"></span></p>
+        <i class="fas fa-sun fa-cloud"></i>
+        <p>Wind: <span id="windSpeed"></span> <span id="windD"></span></p>
+        <p>Short Forecast: <span id="short"></span></p>
+        <!-- <p>Detailed Forecast: <span id="detailed"></span></p> -->
+        <p>Updated: <span id="updateTime"></span></p>
+        <!-- <div>Latitude: <span id="latitude"></span></div>
+        <div>Longitude: <span id="longitude"></span></div> -->
+    </div>
+    
+</body>
+</html>

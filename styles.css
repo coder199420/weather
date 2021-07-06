@@ -1,0 +1,27 @@
+body {
+    text-align: center;
+}
+.forecast{
+    margin: 0 auto;
+    text-align: center;
+    width: 20%;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 0 10px;
+    color: white;
+}
+#tempInfo {
+    font-size: 3em;
+    font-weight: bold;
+    margin: 20px 0;
+
+}
+.fa-sun {
+    font-size: 3em;
+    visibility: hidden;
+}
+.fa-cloud{
+    /* color:#888; */
+    font-size: 3em;
+    visibility: hidden;
+}
