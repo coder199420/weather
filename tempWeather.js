@@ -91,7 +91,7 @@ fetch(url)
             let windD = myWeather.properties.periods[i]['windDirection'];
             let windSpeed = myWeather.properties.periods[i]['windSpeed'];
             let date = new Date(updateTime);
-            let isDayTime = myWeather.properties.periods[i]['isDayTime'];
+            let isDayTime = myWeather.properties.periods[i]['isDaytime'];
             
             if (isDayTime){
                 setDayStyle(myShort);
@@ -101,7 +101,7 @@ fetch(url)
             }
 
             // Get the values displayed to the window
-            setDayStyle(myShort);
+            // setDayStyle(myShort);
             setForecast(myTemp, myTempUnit, windD, windSpeed, date, myShort);
                         
         })
@@ -155,6 +155,12 @@ const setDayStyle = (myShort) => {
 
 const setNightStyle = (myShort) => {
     if (myShort === 'Clear') {
+        document.querySelector('#forecast').style.backgroundColor = '#230051';
+        document.getElementById('icon').classList.add("fas", "fa-moon");
+        document.querySelector('.fa-moon').style.visibility = 'visible';
+        document.querySelector('.fa-moon').style.color = 'white';
+    }
+    else if (myShort === 'Mostly Clear') {
         document.querySelector('#forecast').style.backgroundColor = '#230051';
         document.getElementById('icon').classList.add("fas", "fa-moon");
         document.querySelector('.fa-moon').style.visibility = 'visible';
