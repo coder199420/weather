@@ -53,10 +53,7 @@ fetch(url)
         .then(myWeather => {
 
             let hour = new Date().getHours();
-            
-            // console.log(hour);
-            
-            
+
             // I might use this in the future to display a weekly forecast.
             
             // if (hour >= 12) {
@@ -94,10 +91,17 @@ fetch(url)
             let windD = myWeather.properties.periods[i]['windDirection'];
             let windSpeed = myWeather.properties.periods[i]['windSpeed'];
             let date = new Date(updateTime);
-                    
+            let isDayTime = myWeather.properties.periods[i]['isDayTime'];
+            
+            if (isDayTime){
+                setDayStyle(myShort);
+            }
+            else {
+                setNightStyle(myShort);
+            }
 
             // Get the values displayed to the window
-            setWeatherStyle(myShort);
+            setDayStyle(myShort);
             setForecast(myTemp, myTempUnit, windD, windSpeed, date, myShort);
                         
         })
@@ -114,18 +118,47 @@ const setForecast = (myTemp, myTempUnit, windD, windSpeed, date, myShort) => {
     document.querySelector('#short').innerHTML = myShort;
 }
 
-const setWeatherStyle = (myShort) => {
+const setDayStyle = (myShort) => {
     // This does the styling for the background color / image
     // as well as setting the icon.
     if (myShort === 'Sunny') {
         document.querySelector('#forecast').style.backgroundColor = '#008cff';
+        document.getElementById('icon').classList.add("fas", "fa-sun");
+        document.querySelector('.fa-sun').style.visibility = 'visible';
+        document.querySelector('.fa-sun').style.color = 'yellow';
+    }
+    else if (myShort === 'Mostly Clear') {
+        document.querySelector('#forecast').style.backgroundColor = '#008cff';
+        document.getElementById('icon').classList.add("fas", "fa-sun");
         document.querySelector('.fa-sun').style.visibility = 'visible';
         document.querySelector('.fa-sun').style.color = 'yellow';
     }
     else if (myShort === 'Cloudy') {
         document.querySelector('#forecast').style.backgroundImage = "url('images/cloudy-sky.jpg')";
+        document.getElementById('icon').classList.add("fas", "fa-cloud");
         document.querySelector('.fa-cloud').style.visibility = 'visible';
-        document.querySelector('.fa-sun').style.color = '#888';
+        document.querySelector('.fa-cloud').style.color = '#888';
+    }
+    else if (myShort === 'Partly Cloudy') {
+        document.querySelector('#forecast').style.backgroundImage = "url('images/cloudy-sky.jpg')";
+        document.getElementById('icon').classList.add("fas", "fa-cloud-sun");
+        document.querySelector('.fa-cloud-sun').style.visibility = 'visible';
+        document.querySelector('.fa-cloud-sun').style.color = '#999';
+    }
+    else if (myShort === 'Rainy') {
+        document.querySelector('#forecast').style.backgroundColor = '#008cff';
+        document.getElementById('icon').classList.add("fas", "fa-cloud-rain");
+        document.querySelector('.fa-cloud-rain').style.visibility = 'visible';
+        document.querySelector('.fa-cloud-rain').style.color = '888';
+    }
+}
+
+const setNightStyle = (myShort) => {
+    if (myShort === 'Clear') {
+        document.querySelector('#forecast').style.backgroundColor = '#230051';
+        document.getElementById('icon').classList.add("fas", "fa-moon");
+        document.querySelector('.fa-moon').style.visibility = 'visible';
+        document.querySelector('.fa-moon').style.color = 'white';
     }
 }
 

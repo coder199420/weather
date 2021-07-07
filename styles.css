@@ -20,8 +20,19 @@ body {
     font-size: 3em;
     visibility: hidden;
 }
-.fa-cloud{
-    /* color:#888; */
+.fa-cloud {
+    font-size: 3em;
+    visibility: hidden;
+}
+.fa-cloud-sun {
+    font-size: 3em;
+    visibility: hidden;
+}
+.fa-cloud-rain {
+    font-size: 3em;
+    visibility: hidden;
+}
+.fa-moon {
     font-size: 3em;
     visibility: hidden;
 }
