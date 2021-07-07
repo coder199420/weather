@@ -101,7 +101,6 @@ fetch(url)
             }
 
             // Get the values displayed to the window
-            // setDayStyle(myShort);
             setForecast(myTemp, myTempUnit, windD, windSpeed, date, myShort);
                         
         })
