@@ -17,15 +17,15 @@ const getLocation = () => {
 
     // Couldn't figure out how to make the API use these variables
     // to pass into the url.
-        // let url = "https://api.weather.gov/points/'lon='+lon+'&lat='+lat";
+        
     // document.querySelector('#latitude').innerHTML= lat;
     // document.querySelector('#longitude').innerHTML = lon;
-    
     setLocation(city, state);
+    getForecast(lat, lon);
     });
 }
 
-const setLocation = (city, state) =>{
+const setLocation = (city, state) => {
     // Displaying the location to the window.
     document.querySelector('#city').innerHTML= city;
     document.querySelector('#state').innerHTML = state;
@@ -34,13 +34,14 @@ const setLocation = (city, state) =>{
 const getWeather = () => {
     // This gets the ball rolling.
     getLocation();
-    getForecast();
+    
 }
 
 
-const getForecast = () => {
-    // Manualling entering the coordinates for Rexburg, ID
-let url = 'https://api.weather.gov/points/43.81,-111.789';
+const getForecast = (lat, lon) => {
+    // Passing the params from the getLocation() function.
+    let url = `https://api.weather.gov/points/${lat},${lon}`;
+
 // Getting info from the API
 fetch(url)
     .then(response => response.json())
@@ -53,7 +54,10 @@ fetch(url)
         .then(myWeather => {
 
             let hour = new Date().getHours();
-
+            
+            // console.log(hour);
+            
+            
             // I might use this in the future to display a weekly forecast.
             
             // if (hour >= 12) {
@@ -92,7 +96,7 @@ fetch(url)
             let windSpeed = myWeather.properties.periods[i]['windSpeed'];
             let date = new Date(updateTime);
             let isDayTime = myWeather.properties.periods[i]['isDaytime'];
-            
+                    
             if (isDayTime){
                 setDayStyle(myShort);
             }
