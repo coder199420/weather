@@ -37,7 +37,6 @@ const getWeather = () => {
     
 }
 
-
 const parseDOW = (updateTime) => {
     // Format the Day of the Week
     let updateDOW = new Date(updateTime).getDay();
@@ -111,9 +110,6 @@ const parseUpdateTime = (updateTime) => {
     let updateHour = new Date(updateTime).getHours();
     let updateMin = new Date(updateTime).getMinutes();
     
-    
-    
-
     parseDOW(updateTime);
 
     parseMonth(updateTime);
