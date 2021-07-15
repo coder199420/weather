@@ -37,6 +37,19 @@ const getWeather = () => {
     
 }
 
+const parseUpdateTime = (updateTime) => {
+    let updateHour = updateTime.slice(11,13);
+
+    if (updateHour >= 13) {
+        updateHour - 12;
+    }
+    else if (updateHour < 12) {
+        document.querySelector('#m').innerHTML = 'am';
+    }
+    else {
+        document.querySelector('#m').innerHTML = 'pm';
+    }
+}
 
 const getForecast = (lat, lon) => {
     // Passing the params from the getLocation() function.
@@ -96,6 +109,8 @@ fetch(url)
             let windSpeed = myWeather.properties.periods[i]['windSpeed'];
             let date = new Date(updateTime);
             let isDayTime = myWeather.properties.periods[i]['isDaytime'];
+
+            parseUpdateTime(updateTime);
                     
             if (isDayTime){
                 setDayStyle(myShort);
@@ -124,53 +139,105 @@ const setForecast = (myTemp, myTempUnit, windD, windSpeed, date, myShort) => {
 const setDayStyle = (myShort) => {
     // This does the styling for the background color / image
     // as well as setting the icon.
-    if (myShort === 'Sunny') {
-        document.querySelector('#forecast').style.backgroundColor = '#008cff';
-        document.getElementById('icon').classList.add("fas", "fa-sun");
-        document.querySelector('.fa-sun').style.visibility = 'visible';
-        document.querySelector('.fa-sun').style.color = 'yellow';
-    }
-    else if (myShort === 'Mostly Clear') {
-        document.querySelector('#forecast').style.backgroundColor = '#008cff';
-        document.getElementById('icon').classList.add("fas", "fa-sun");
-        document.querySelector('.fa-sun').style.visibility = 'visible';
-        document.querySelector('.fa-sun').style.color = 'yellow';
-    }
-    else if (myShort === 'Cloudy') {
-        document.querySelector('#forecast').style.backgroundImage = "url('images/cloudy-sky.jpg')";
-        document.getElementById('icon').classList.add("fas", "fa-cloud");
-        document.querySelector('.fa-cloud').style.visibility = 'visible';
-        document.querySelector('.fa-cloud').style.color = '#888';
-    }
-    else if (myShort === 'Partly Cloudy') {
-        document.querySelector('#forecast').style.backgroundImage = "url('images/cloudy-sky.jpg')";
-        document.getElementById('icon').classList.add("fas", "fa-cloud-sun");
-        document.querySelector('.fa-cloud-sun').style.visibility = 'visible';
-        document.querySelector('.fa-cloud-sun').style.color = '#999';
-    }
-    else if (myShort === 'Rainy') {
-        document.querySelector('#forecast').style.backgroundColor = '#008cff';
-        document.getElementById('icon').classList.add("fas", "fa-cloud-rain");
-        document.querySelector('.fa-cloud-rain').style.visibility = 'visible';
-        document.querySelector('.fa-cloud-rain').style.color = '888';
+    switch (myShort){
+        
+        case 'Sunny' : {
+            document.querySelector('#forecast').style.backgroundColor = '#008cff';
+            document.getElementById('icon').classList.add("fas", "fa-sun");
+            document.querySelector('.fa-sun').style.visibility = 'visible';
+            document.querySelector('.fa-sun').style.color = 'yellow';
+            break;
+        }
+
+        case 'Mostly Clear' : {
+            document.querySelector('#forecast').style.backgroundColor = '#008cff';
+            document.getElementById('icon').classList.add("fas", "fa-sun");
+            document.querySelector('.fa-sun').style.visibility = 'visible';
+            document.querySelector('.fa-sun').style.color = 'yellow';
+            break;
+        }
+
+        case 'Cloudy' : {
+            document.querySelector('#forecast').style.backgroundImage = "url('images/cloudy-sky.jpg')";
+            document.getElementById('icon').classList.add("fas", "fa-cloud");
+            document.querySelector('.fa-cloud').style.visibility = 'visible';
+            document.querySelector('.fa-cloud').style.color = '#888';
+            break;
+        }
+
+        case 'Partly Cloudy' : {
+            document.querySelector('#forecast').style.backgroundImage = "url('images/cloudy-sky.jpg')";
+            document.getElementById('icon').classList.add("fas", "fa-cloud-sun");
+            document.querySelector('.fa-cloud-sun').style.visibility = 'visible';
+            document.querySelector('.fa-cloud-sun').style.color = '#999';
+            break;
+        }
+
+        case 'Rainy' : {
+            document.querySelector('#forecast').style.backgroundColor = '#008cff';
+            document.getElementById('icon').classList.add("fas", "fa-cloud-rain");
+            document.querySelector('.fa-cloud-rain').style.visibility = 'visible';
+            document.querySelector('.fa-cloud-rain').style.color = '888';
+            break;
+        }
+
+        case 'Haze' : {
+            document.querySelector('#forecast').style.backgroundColor = '#008cff';
+            document.getElementById('icon').classList.add("fas", "fa-sun");
+            document.querySelector('.fa-sun').style.visibility = 'visible';
+            document.querySelector('.fa-sun').style.color = 'yellow';
+            break;
+        }
+
+        case 'Partly Smokey' : {
+            document.querySelector('#forecast').style.backgroundColor = '#008cff';
+            document.getElementById('icon').classList.add("fas", "fa-sun");
+            document.querySelector('.fa-sun').style.visibility = 'visible';
+            document.querySelector('.fa-sun').style.color = 'yellow';
+            break;
+        }
+        
+        default : { 
+            document.querySelector('#forecast').style.backgroundColor = '#008cff';
+            document.getElementById('icon').classList.add("fas", "fa-sun");
+            document.querySelector('.fa-sun').style.visibility = 'visible';
+            document.querySelector('.fa-sun').style.color = 'yellow';
+        }
     }
 }
 
 const setNightStyle = (myShort) => {
-    if (myShort === 'Clear') {
-        document.querySelector('#forecast').style.backgroundColor = '#230051';
-        document.getElementById('icon').classList.add("fas", "fa-moon");
-        document.querySelector('.fa-moon').style.visibility = 'visible';
-        document.querySelector('.fa-moon').style.color = 'white';
-    }
-    else if (myShort === 'Mostly Clear') {
-        document.querySelector('#forecast').style.backgroundColor = '#230051';
-        document.getElementById('icon').classList.add("fas", "fa-moon");
-        document.querySelector('.fa-moon').style.visibility = 'visible';
-        document.querySelector('.fa-moon').style.color = 'white';
+    // Using switch case to make it a little more clear.
+    switch (myShort) {
+        case 'Clear' : {
+            document.querySelector('#forecast').style.backgroundColor = '#230051';
+            document.getElementById('icon').classList.add("fas", "fa-moon");
+            document.querySelector('.fa-moon').style.visibility = 'visible';
+            document.querySelector('.fa-moon').style.color = 'white';
+        }
+
+        case 'Mostly Clear' : {
+            document.querySelector('#forecast').style.backgroundColor = '#230051';
+            document.getElementById('icon').classList.add("fas", "fa-moon");
+            document.querySelector('.fa-moon').style.visibility = 'visible';
+            document.querySelector('.fa-moon').style.color = 'white';
+        }
+
+        case 'Haze' : {
+            document.querySelector('#forecast').style.backgroundColor = '#230051';
+            document.getElementById('icon').classList.add("fas", "fa-moon");
+            document.querySelector('.fa-moon').style.visibility = 'visible';
+            document.querySelector('.fa-moon').style.color = 'white';
+        }
+
+        default : {
+            document.querySelector('#forecast').style.backgroundColor = '#230051';
+            document.getElementById('icon').classList.add("fas", "fa-moon");
+            document.querySelector('.fa-moon').style.visibility = 'visible';
+            document.querySelector('.fa-moon').style.color = 'white';
+        }
     }
 }
 
 // This gets things going. Think of it as a Driver Program.
 window.addEventListener('load', getWeather());
-
