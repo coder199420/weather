@@ -38,17 +38,63 @@ const getWeather = () => {
 }
 
 const parseUpdateTime = (updateTime) => {
-    let updateHour = updateTime.slice(11,13);
+    let updateDate = new Date(updateTime).getDate();
+    let updateHour = new Date(updateTime).getHours();
+    let updateMin = new Date(updateTime).getMinutes();
+    let updateDOW = new Date(updateTime).getDay();
+    let updateMonth = new Date(updateTime).getMonth();
+    console.log(updateTime);
+    let updateOffset = updateTime.slice(20,25);
+    // console.log(updateOffset);
+
+    if (updateDOW === 0){
+        updateDOW = 'Sun';
+    }
+    else if (updateDOW === '1') {
+        updateDOW = 'Mon';
+    }
+    else if (updateDOW === 2) {
+        updateDOW = 'Tue';
+    }
+    else if (updateDOW === 3) {
+        updateDOW = 'Wed';
+    }
+    else if (updateDOW === 4) {
+        updateDOW = 'Thu';
+    }
+    else if (updateDOW === 5) {
+        updateDOW = 'Fri';
+    }
+    else {
+        updateDOW = 'Sat';
+    }
+
+    if (updateMonth === 0) {
+        updateMonth = 'Jan';
+    }
+    else if (updateMonth === 6) {
+        updateMonth = 'Jul';
+    }
+
+    if (updateMin < 10) {
+        updateMin = '0' + updateMin;
+    }
 
     if (updateHour >= 13) {
         updateHour - 12;
     }
     else if (updateHour < 12) {
-        document.querySelector('#m').innerHTML = 'am';
+        document.querySelector('#am-pm').innerHTML = 'am';
     }
     else {
-        document.querySelector('#m').innerHTML = 'pm';
+        document.querySelector('#am-pm').innerHTML = 'pm';
     }
+
+    document.querySelector('#updateDOW').innerHTML = updateDOW;
+    document.querySelector('#updateDate').innerHTML = updateDate;
+    document.querySelector('#updateMonth').innerHTML = updateMonth;
+    document.querySelector('#updateTime').innerHTML = updateHour;
+    document.querySelector('#updateMin').innerHTML = updateMin;
 }
 
 const getForecast = (lat, lon) => {
@@ -107,7 +153,7 @@ fetch(url)
             // let myDetailed = myWeather.properties.periods[i]['detailedForecast'];
             let windD = myWeather.properties.periods[i]['windDirection'];
             let windSpeed = myWeather.properties.periods[i]['windSpeed'];
-            let date = new Date(updateTime);
+            // let date = new Date(updateTime);
             let isDayTime = myWeather.properties.periods[i]['isDaytime'];
 
             parseUpdateTime(updateTime);
@@ -120,19 +166,19 @@ fetch(url)
             }
 
             // Get the values displayed to the window
-            setForecast(myTemp, myTempUnit, windD, windSpeed, date, myShort);
+            setForecast(myTemp, myTempUnit, windD, windSpeed, myShort);
                         
         })
     });
 }
 
-const setForecast = (myTemp, myTempUnit, windD, windSpeed, date, myShort) => {
+const setForecast = (myTemp, myTempUnit, windD, windSpeed, myShort) => {
     // This is displaying the values to the window.
     document.querySelector('#temp').innerHTML = myTemp;
     document.querySelector('#tempUnit').innerHTML = myTempUnit;
     document.querySelector('#windD').innerHTML = windD;
     document.querySelector('#windSpeed').innerHTML = windSpeed;
-    document.querySelector('#updateTime').innerHTML = date;
+    // document.querySelector('#updateTime').innerHTML = date;
     document.querySelector('#short').innerHTML = myShort;
 }
 
