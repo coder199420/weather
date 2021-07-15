@@ -37,16 +37,7 @@ const getWeather = () => {
     
 }
 
-const parseUpdateTime = (updateTime) => {
-    let updateDate = new Date(updateTime).getDate();
-    let updateHour = new Date(updateTime).getHours();
-    let updateMin = new Date(updateTime).getMinutes();
-    let updateDOW = new Date(updateTime).getDay();
-    let updateMonth = new Date(updateTime).getMonth();
-    console.log(updateTime);
-    let updateOffset = updateTime.slice(20,25);
-    // console.log(updateOffset);
-
+const parseDOW = (updateTime, updateDOW) => {
     if (updateDOW === 0){
         updateDOW = 'Sun';
     }
@@ -68,6 +59,18 @@ const parseUpdateTime = (updateTime) => {
     else {
         updateDOW = 'Sat';
     }
+    document.querySelector('#updateDOW').innerHTML = updateDOW;
+}
+
+const parseUpdateTime = (updateTime) => {
+    let updateDate = new Date(updateTime).getDate();
+    let updateHour = new Date(updateTime).getHours();
+    let updateMin = new Date(updateTime).getMinutes();
+    let updateDOW = new Date(updateTime).getDay();
+    let updateMonth = new Date(updateTime).getMonth();
+    
+
+    parseDOW(updateTime, updateDOW);
 
     if (updateMonth === 0) {
         updateMonth = 'Jan';
@@ -90,7 +93,7 @@ const parseUpdateTime = (updateTime) => {
         document.querySelector('#am-pm').innerHTML = 'pm';
     }
 
-    document.querySelector('#updateDOW').innerHTML = updateDOW;
+    
     document.querySelector('#updateDate').innerHTML = updateDate;
     document.querySelector('#updateMonth').innerHTML = updateMonth;
     document.querySelector('#updateTime').innerHTML = updateHour;
