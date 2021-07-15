@@ -37,7 +37,11 @@ const getWeather = () => {
     
 }
 
-const parseDOW = (updateTime, updateDOW) => {
+
+const parseDOW = (updateTime) => {
+    // Format the Day of the Week
+    let updateDOW = new Date(updateTime).getDay();
+    
     if (updateDOW === 0){
         updateDOW = 'Sun';
     }
@@ -59,44 +63,86 @@ const parseDOW = (updateTime, updateDOW) => {
     else {
         updateDOW = 'Sat';
     }
+    
     document.querySelector('#updateDOW').innerHTML = updateDOW;
+}
+
+const parseMonth = (updateTime) => {
+    let updateMonth = new Date(updateTime).getMonth();
+    
+    if (updateMonth === 0) {
+        updateMonth = 'Jan';
+    }
+    else if (updateMonth === 1) {
+        updateMonth = 'Feb';
+    }
+    else if (updateMonth === 2) {
+        updateMonth = 'Mar';
+    }
+    else if (updateMonth === 3) {
+        updateMonth = 'Apr';
+    }
+    else if (updateMonth === 4) {
+        updateMonth = 'Jun';
+    }
+    else if (updateMonth === 5) {
+        updateMonth = 'Jul';
+    }
+    else if (updateMonth === 6) {
+        updateMonth = 'Aug';
+    }
+    else if (updateMonth === 7) {
+        updateMonth = 'Sep';
+    }
+    else if (updateMonth === 8) {
+        updateMonth = 'Oct';
+    }
+    else if (updateMonth === 9) {
+        updateMonth = 'Nov';
+    }
+    else if (updateMonth === 10) {
+        updateMonth = 'Dec';
+    }
+    document.querySelector('#updateMonth').innerHTML = updateMonth;
 }
 
 const parseUpdateTime = (updateTime) => {
     let updateDate = new Date(updateTime).getDate();
     let updateHour = new Date(updateTime).getHours();
     let updateMin = new Date(updateTime).getMinutes();
-    let updateDOW = new Date(updateTime).getDay();
-    let updateMonth = new Date(updateTime).getMonth();
+    
+    
     
 
-    parseDOW(updateTime, updateDOW);
+    parseDOW(updateTime);
 
-    if (updateMonth === 0) {
-        updateMonth = 'Jan';
-    }
-    else if (updateMonth === 6) {
-        updateMonth = 'Jul';
-    }
+    parseMonth(updateTime);
 
+    // Format the minutes
+    // add a 0 if minutes are less than 10
     if (updateMin < 10) {
         updateMin = '0' + updateMin;
     }
 
+    // Convert military time to 12 hour time
+    // if hour is 13 (1pm), then subtract 12 to make it 1pm
+    // also add pm
     if (updateHour >= 13) {
-        updateHour - 12;
-    }
-    else if (updateHour < 12) {
-        document.querySelector('#am-pm').innerHTML = 'am';
-    }
-    else {
-        document.querySelector('#am-pm').innerHTML = 'pm';
-    }
+        var newHour = updateHour - 12;
+        let pm = 'pm';
+        
+        document.querySelector('#am-pm').innerHTML = pm;
 
+    }
+    // if it's before noon, add am
+    else if (updateHour < 12) {
+        let am = 'am';
+        document.querySelector('#am-pm').innerHTML = am;
+        console.log(am);
+    }
     
     document.querySelector('#updateDate').innerHTML = updateDate;
-    document.querySelector('#updateMonth').innerHTML = updateMonth;
-    document.querySelector('#updateTime').innerHTML = updateHour;
+    document.querySelector('#updateTime').innerHTML = newHour;
     document.querySelector('#updateMin').innerHTML = updateMin;
 }
 
