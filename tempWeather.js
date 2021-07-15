@@ -7,13 +7,14 @@
 
 const getLocation = () => {
     // Using this to get the lat / lon from the IP address
-    $.getJSON('https://geoip-db.com/json/geoip.php?jsonp=?')
+    $.getJSON('https://ipgeolocation.abstractapi.com/v1/?api_key=81805a1eb5af493f8b14cf816c322747')
     .done (function(location)
     {
+        console.log(location);
         let lat = parseFloat(location.latitude);
         let lon = parseFloat(location.longitude);
         let city = location.city;
-        let state = location.state;
+        let state = location.region;
 
     // Couldn't figure out how to make the API use these variables
     // to pass into the url.
