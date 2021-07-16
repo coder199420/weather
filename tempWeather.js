@@ -111,9 +111,6 @@ const parseUpdateTime = (updateTime) => {
     let updateHour = new Date(updateTime).getHours();
     let updateMin = new Date(updateTime).getMinutes();
     
-    parseDOW(updateTime);
-
-    parseMonth(updateTime);
 
     // Format the minutes
     // add a 0 if minutes are less than 10
@@ -129,18 +126,23 @@ const parseUpdateTime = (updateTime) => {
         let pm = 'pm';
         
         document.querySelector('#am-pm').innerHTML = pm;
+        document.querySelector('#updateTime').innerHTML = newHour;
 
     }
     // if it's before noon, add am
     else if (updateHour < 12) {
         let am = 'am';
         document.querySelector('#am-pm').innerHTML = am;
-        console.log(am);
+        document.querySelector('#updateTime').innerHTML = updateHour;
     }
     
     document.querySelector('#updateDate').innerHTML = updateDate;
-    document.querySelector('#updateTime').innerHTML = newHour;
+    
     document.querySelector('#updateMin').innerHTML = updateMin;
+
+    parseDOW(updateTime);
+
+    parseMonth(updateTime);
 }
 
 const getForecast = (lat, lon) => {
