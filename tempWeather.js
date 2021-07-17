@@ -83,24 +83,27 @@ const parseMonth = (updateTime) => {
         updateMonth = 'Apr';
     }
     else if (updateMonth === 4) {
-        updateMonth = 'Jun';
+        updateMonth = 'May';
     }
     else if (updateMonth === 5) {
-        updateMonth = 'Jul';
+        updateMonth = 'Jun';
     }
     else if (updateMonth === 6) {
-        updateMonth = 'Aug';
+        updateMonth = 'Jul';
     }
     else if (updateMonth === 7) {
-        updateMonth = 'Sep';
+        updateMonth = 'Aug';
     }
     else if (updateMonth === 8) {
-        updateMonth = 'Oct';
+        updateMonth = 'Sep';
     }
     else if (updateMonth === 9) {
-        updateMonth = 'Nov';
+        updateMonth = 'Oct';
     }
     else if (updateMonth === 10) {
+        updateMonth = 'Nov';
+    }
+    else if (updateMonth === 11) {
         updateMonth = 'Dec';
     }
     document.querySelector('#updateMonth').innerHTML = updateMonth;
@@ -137,11 +140,9 @@ const parseUpdateTime = (updateTime) => {
     }
     
     document.querySelector('#updateDate').innerHTML = updateDate;
-    
     document.querySelector('#updateMin').innerHTML = updateMin;
 
     parseDOW(updateTime);
-
     parseMonth(updateTime);
 }
 
