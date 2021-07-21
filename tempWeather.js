@@ -138,6 +138,11 @@ const parseUpdateTime = (updateTime) => {
         document.querySelector('#am-pm').innerHTML = am;
         document.querySelector('#updateTime').innerHTML = updateHour;
     }
+    else {
+        let pm = 'pm';
+        document.querySelector('#am-pm').innerHTML = pm;
+        document.querySelector('#updateTime').innerHTML = updateHour;
+    }
     
     document.querySelector('#updateDate').innerHTML = updateDate;
     document.querySelector('#updateMin').innerHTML = updateMin;
